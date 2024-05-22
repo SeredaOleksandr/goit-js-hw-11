@@ -1,15 +1,16 @@
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 const gallery = document.querySelector('.gallery');
 
 let lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250
+  captionsData: 'alt',
+  captionDelay: 250,
 });
 
 const addImages = response => {
-    const galleryList = response.hits.map(image => {
-        return `<li class="gallery-item">
+  const galleryList = response.hits
+    .map(image => {
+      return `<li class="gallery-item">
             <a class="gallery-link" href=${image.largeImageURL}>
                 <img
                     src=${image.webformatURL}
@@ -17,14 +18,15 @@ const addImages = response => {
                 />
             </a>
                  <div>
-                <p>Likes ${image.likes}</p>
-                <p>Views ${image.views}</p>
-                <p>Comments ${image.comments}</p>
-                <p>Downloads ${image.downloads}</p>
+                <p><span>Likes</span> ${image.likes}</p>
+                <p><span>Views</span> ${image.views}</p>
+                <p><span>Comments</span> ${image.comments}</p>
+                <p><span>Downloads</span> ${image.downloads}</p>
             </div>
-                </li>`
-    }).join('');
-    gallery.insertAdjacentHTML('beforeend', galleryList);
-    lightbox.refresh();
+                </li>`;
+    })
+    .join('');
+  gallery.insertAdjacentHTML('beforeend', galleryList);
+  lightbox.refresh();
 };
 export default addImages;
